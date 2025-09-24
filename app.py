@@ -11,13 +11,21 @@ st.title("Introvert Predictor 🧠")
 st.write("Enter the following details to predict if a person is an Introvert or not:")
 
 # Input widgets
-time_spent_alone = st.number_input("Time spent alone (hours per day)", min_value=0, max_value=10, value=3)
-stage_fear = st.slider("Stage fear (0-5)", min_value=0, max_value=1, value=0)
-social_event_attendance = st.slider("Social event attendance (0-10)", min_value=0, max_value=10, value=0)
-going_outside = st.slider("Going outside (0-10)", min_value=0, max_value=10, value=6)
-drained_after_socializing = st.slider("Drained after socializing (0-10)", min_value=0, max_value=1, value=0)
-friends_circle_size = st.slider("Friends circle size (0-20)", min_value=0, max_value=20, value=5)
-post_frequency = st.slider("Post frequency (0-20)", min_value=0, max_value=20, value=5)
+time_spent_alone = st.number_input("Time spent alone (hours per day)", min_value=0, max_value=24, value=3)
+
+# Binary inputs with Yes/No
+stage_fear = st.radio("Do you have stage fear?", ["No", "Yes"])
+drained_after_socializing = st.radio("Do you feel drained after socializing?", ["No", "Yes"])
+
+# Convert Yes/No to 0/1
+stage_fear = 1 if stage_fear == "Yes" else 0
+drained_after_socializing = 1 if drained_after_socializing == "Yes" else 0
+
+# Numeric inputs
+social_event_attendance = st.slider("Social event attendance per month", min_value=0, max_value=30, value=2)
+going_outside = st.slider("Going outside per week", min_value=0, max_value=7, value=3)
+friends_circle_size = st.slider("Friends circle size", min_value=0, max_value=50, value=5)
+post_frequency = st.slider("Post frequency (per week)", min_value=0, max_value=50, value=5)
 
 # Prepare input DataFrame
 input_data = pd.DataFrame([[
